@@ -1,11 +1,11 @@
 import { useContext, useLayoutEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import ExpenseForm from '../components/ManageExpense/ExpenseForm';
-import Button from '../components/UI/Button';
 import IconButton from '../components/UI/IconButton';
 import { GlobalStyles } from '../constants/styles';
 
 import { ExpensesContext } from '../store/expenses-context';
+import { storeExpense } from '../util/http';
 
 function ManageExpense({ route, navigation }) {
   const expensesCtx = useContext(ExpensesContext);
@@ -36,13 +36,14 @@ function ManageExpense({ route, navigation }) {
     if (isEditing) {
       expensesCtx.updateExpense(editedExpenseId, expenseData);
     } else {
+      storeExpense(expenseData);
       expensesCtx.addExpense(expenseData);
     }
     navigation.goBack();
   }
 
   return (
-    <View styles={styles.container}>
+    <View style={styles.container}>
       <ExpenseForm
         submitButtonLabel={isEditing ? 'Update' : 'Add'}
         onCancel={cancelHandler}
@@ -51,7 +52,7 @@ function ManageExpense({ route, navigation }) {
       />
 
       {isEditing && (
-        <View styles={styles.deleteContainer}>
+        <View style={styles.deleteContainer}>
           <IconButton
             icon="trash"
             color={GlobalStyles.colors.error500}
@@ -74,8 +75,8 @@ const styles = StyleSheet.create({
   },
   deleteContainer: {
     marginTop: 16,
-    padding: 8,
-    borderWidth: 2,
+    paddingTop: 8,
+    borderTopWidth: 2,
     borderTopColor: GlobalStyles.colors.primary200,
     alignItems: 'center',
   },

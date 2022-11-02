@@ -41,7 +41,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
     const dateIsValid = expenseData.date.toString() !== 'Invalid Date';
     const descriptionIsValid = expenseData.description.trim().length > 0;
 
-    if (!amountIsValid || !dateIsValid || descriptionIsValid) {
+    if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
       //Alert.alert('Invalid input', 'Please check input values');
       setInputs((curInputs) => {
         return {
@@ -67,7 +67,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
   return (
     <View style={styles.form}>
       <Text style={styles.title}>Your Expense</Text>
-      <View styles={styles.inputsRow}>
+      <View style={styles.inputsRow}>
         <Input
           style={styles.rowInput}
           label="Amount"
@@ -108,7 +108,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
       )}
       <View style={styles.buttons}>
         <Button style={styles.button} mode="flat" onPress={onCancel}>
-          Cancel
+          <Text style={styles.cancel}>Cancel </Text>
         </Button>
         <Button style={styles.button} onPress={submitHandler}>
           {submitButtonLabel}
@@ -151,5 +151,8 @@ const styles = StyleSheet.create({
   },
   rowInput: {
     flex: 1,
+  },
+  cancel: {
+    color: 'black',
   },
 });

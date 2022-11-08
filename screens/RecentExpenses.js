@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Text } from 'react-native';
+
 import ExpensesOutput from '../components/ExpensesOutput/ExpensesOutput';
 import ErrorOverlay from '../components/UI/ErrorOverlay';
 import LoadingOverlay from '../components/UI/LoadingOverlay';
